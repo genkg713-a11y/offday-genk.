@@ -1,24 +1,17 @@
-```html
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#061b2a">
-
 <title>OFFDAY GENK — Countdown</title>
 
 <style>
-:root {
-  color-scheme: dark;
-}
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
+html, body {
   width: 100%;
   min-height: 100%;
   margin: 0;
@@ -29,297 +22,176 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
-  overflow-y: auto;
-
-  background-color: #061b2a;
+  background: #061b2a;
   background-image:
-    linear-gradient(
-      180deg,
-      rgba(2, 12, 25, 0.35) 0%,
-      rgba(2, 12, 25, 0.18) 38%,
-      rgba(1, 10, 18, 0.72) 100%
-    ),
+    linear-gradient(180deg, rgba(2,12,25,.35), rgba(1,10,18,.72)),
     url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2400&q=90");
-
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  background-repeat: no-repeat;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: #ffffff;
+  color: white;
 }
 
-/* LAPISAN GELAP BACKGROUND */
 .shade {
   position: fixed;
   inset: 0;
   z-index: 0;
-
-  background: radial-gradient(
-    ellipse at center,
-    transparent 10%,
-    rgba(0, 0, 0, 0.35) 100%
-  );
-
+  background: radial-gradient(ellipse at center, transparent 10%, rgba(0,0,0,.35));
   pointer-events: none;
 }
 
-/* KONTEN UTAMA */
 main {
   position: relative;
   z-index: 1;
-
   width: min(1100px, 94vw);
   margin: auto;
   padding: 70px 24px 35px;
-
   text-align: center;
 }
 
-/* ANIMASI NEON MERAH */
 @keyframes kedipGenk {
-  0%, 100% {
+  0%,100% {
     opacity: 1;
-
-    text-shadow:
-      0 4px 0 #710000,
-      0 0 10px #ff2525,
-      0 0 25px #ff2525,
-      0 0 45px #ff0000,
-      0 8px 28px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 4px #710000, 0 0 10px #ff2525,
+      0 0 25px #ff2525, 0 0 45px red, 0 8px 28px #000b;
   }
-
   50% {
-    opacity: 0.65;
-
-    text-shadow:
-      0 4px 0 #710000,
-      0 0 4px #ff2525,
-      0 0 10px #ff0000,
-      0 8px 28px rgba(0, 0, 0, 0.7);
+    opacity: .65;
+    text-shadow: 0 4px #710000, 0 0 4px #ff2525,
+      0 0 10px red, 0 8px 28px #000b;
   }
 }
 
-/* JUDUL OFFDAY GENK */
 h1 {
   margin: 0 0 16px;
-
   font-size: clamp(40px, 9vw, 100px);
   line-height: 1.05;
   font-weight: 1000;
-  letter-spacing: 0.035em;
-
+  letter-spacing: .035em;
   color: #ff2525;
-
   animation: kedipGenk 1.2s ease-in-out infinite;
 }
 
-/* ANIMASI TANGGAL */
 @keyframes kedipTanggal {
-  0%, 100% {
+  0%,100% {
     opacity: 1;
-
-    text-shadow:
-      0 0 8px rgba(255, 37, 37, 0.9),
-      0 0 20px rgba(255, 0, 0, 0.65),
-      0 2px 12px #000000;
+    text-shadow: 0 0 8px #ff2525e6, 0 0 20px #f006, 0 2px 12px #000;
   }
-
   50% {
-    opacity: 0.55;
-
-    text-shadow:
-      0 0 3px rgba(255, 37, 37, 0.5),
-      0 2px 12px #000000;
+    opacity: .55;
+    text-shadow: 0 0 3px #ff252580, 0 2px 12px #000;
   }
 }
 
-/* TANGGAL SPESIAL */
 .target {
   margin: 12px 0 26px;
-
   font-size: clamp(16px, 2.3vw, 27px);
   font-weight: 700;
-
   animation: kedipTanggal 1.2s ease-in-out infinite;
 }
 
-/* COUNTDOWN */
 .timer {
   display: grid;
-
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(8px, 2vw, 22px);
 }
 
-/* KOTAK ANGKA */
 .unit {
   min-width: 0;
-
   padding: clamp(12px, 2.4vw, 28px) 8px;
-
-  border: 1px solid rgba(255, 255, 255, 0.48);
+  border: 1px solid #ffffff7a;
   border-radius: 18px;
-
-  background: rgba(3, 15, 25, 0.65);
-
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.25);
-
+  background: rgba(3,15,25,.65);
+  box-shadow: 0 12px 40px #0004;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 }
 
-/* ANGKA COUNTDOWN */
 .num {
   display: block;
-
   font-variant-numeric: tabular-nums;
   font-size: clamp(32px, 7vw, 82px);
   font-weight: 900;
   line-height: 1.1;
 }
 
-/* LABEL HARI JAM MENIT DETIK */
 .label {
   display: block;
-
   margin-top: 8px;
-
   font-size: clamp(10px, 1.5vw, 17px);
-  letter-spacing: 0.16em;
+  letter-spacing: .16em;
   font-weight: 700;
 }
 
-/* FOOTER */
 .footer {
   margin-top: 26px;
-
   font-size: clamp(12px, 1.7vw, 20px);
-  letter-spacing: 0.16em;
+  letter-spacing: .16em;
   font-weight: 700;
-
-  text-shadow: 0 2px 12px #000000;
+  text-shadow: 0 2px 12px #000;
 }
 
-/* TOMBOL LAYAR PENUH */
 .controls {
   position: fixed;
   top: 16px;
   right: 16px;
-
   z-index: 5;
-
-  display: flex;
-  gap: 8px;
 }
 
 button {
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid #ffffff8c;
   border-radius: 999px;
-
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.55);
-
+  color: white;
+  background: #0009;
   padding: 10px 14px;
-
   font-weight: 700;
   cursor: pointer;
 }
 
-button:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
+button:hover { background: #000c; }
 
 button:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid white;
   outline-offset: 3px;
 }
 
-/* PETUNJUK */
 .hint {
   margin-top: 14px;
-
-  opacity: 0.85;
+  opacity: .85;
   font-size: 12px;
-
-  text-shadow: 0 2px 8px #000000;
+  text-shadow: 0 2px 8px #000;
 }
 
-/* TAMPILAN HP */
 @media (max-width: 560px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  main {
-    width: 96vw;
-    padding: 76px 8px 24px;
-  }
-
-  h1 {
-    font-size: clamp(34px, 10vw, 54px);
-    letter-spacing: 0.01em;
-  }
-
-  .target {
-    margin-bottom: 22px;
-  }
-
-  .timer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .unit {
-    padding: 18px 8px;
-  }
-
-  .num {
-    font-size: clamp(38px, 10vw, 58px);
-  }
-
-  .footer {
-    line-height: 1.7;
-  }
-
-  .controls {
-    top: 10px;
-    right: 10px;
-  }
-
-  button {
-    padding: 9px 12px;
-    font-size: 12px;
-  }
+  body { background-attachment: scroll; }
+  main { width: 96vw; padding: 76px 8px 24px; }
+  h1 { font-size: clamp(34px, 10vw, 54px); letter-spacing: .01em; }
+  .target { margin-bottom: 22px; }
+  .timer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .unit { padding: 18px 8px; }
+  .num { font-size: clamp(38px, 10vw, 58px); }
+  .footer { line-height: 1.7; }
+  .controls { top: 10px; right: 10px; }
+  button { padding: 9px 12px; font-size: 12px; }
 }
 
-/* PENGATURAN REDUKSI GERAK */
 @media (prefers-reduced-motion: reduce) {
-  h1,
-  .target {
-    animation: none;
-  }
+  h1, .target { animation: none; }
 }
 </style>
 </head>
 
 <body>
-
 <div class="shade" aria-hidden="true"></div>
 
 <div class="controls">
-  <button id="fullBtn" type="button">
-    ⛶ Layar penuh
-  </button>
+  <button id="fullBtn" type="button">⛶ Layar penuh</button>
 </div>
 
 <main>
-
   <h1>OFFDAY GENK</h1>
 
   <div class="target" id="targetDate">
@@ -327,87 +199,70 @@ button:focus-visible {
   </div>
 
   <section class="timer" aria-label="Hitung mundur">
-
     <div class="unit">
       <span class="num" id="days">000</span>
       <span class="label">HARI</span>
     </div>
-
     <div class="unit">
       <span class="num" id="hours">00</span>
       <span class="label">JAM</span>
     </div>
-
     <div class="unit">
       <span class="num" id="minutes">00</span>
       <span class="label">MENIT</span>
     </div>
-
     <div class="unit">
       <span class="num" id="seconds">00</span>
       <span class="label">DETIK</span>
     </div>
-
   </section>
 
-  <div class="footer">
-    WAKTU INDONESIA BARAT · WIB (GMT+7)
-  </div>
-
-  <div class="hint">
-    Tekan F11 untuk layar penuh browser, atau klik tombol “Layar penuh”.
-  </div>
-
+  <div class="footer">WAKTU INDONESIA BARAT · WIB (GMT+7)</div>
+  <div class="hint">Tekan F11 untuk layar penuh browser, atau klik tombol “Layar penuh”.</div>
 </main>
 
 <script>
 "use strict";
 
-/* TANGGAL TARGET: 15 NOVEMBER 2026, PUKUL 00.00 WIB */
+// Target: 15 November 2026 pukul 00.00 WIB
 const target = new Date("2026-11-15T00:00:00+07:00").getTime();
 
-const elements = {
-  days: document.getElementById("days"),
-  hours: document.getElementById("hours"),
-  minutes: document.getElementById("minutes"),
-  seconds: document.getElementById("seconds"),
-  targetDate: document.getElementById("targetDate"),
-  fullBtn: document.getElementById("fullBtn")
-};
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
+const targetDateEl = document.getElementById("targetDate");
+const fullBtn = document.getElementById("fullBtn");
 
-const pad = (number, size = 2) =>
-  String(number).padStart(size, "0");
+function pad(number, size = 2) {
+  return String(number).padStart(size, "0");
+}
 
-/* UPDATE COUNTDOWN */
 function updateCountdown() {
   const diff = target - Date.now();
 
   if (diff <= 0) {
-    elements.days.textContent = "000";
-    elements.hours.textContent = "00";
-    elements.minutes.textContent = "00";
-    elements.seconds.textContent = "00";
-
-    elements.targetDate.textContent = "15 NOVEMBER 2026";
-
+    daysEl.textContent = "000";
+    hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
+    secondsEl.textContent = "00";
+    targetDateEl.textContent = "15 NOVEMBER 2026 · WAKTUNYA TIBA!";
     return;
   }
 
   const totalSeconds = Math.floor(diff / 1000);
-
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  elements.days.textContent = pad(days, 3);
-  elements.hours.textContent = pad(hours);
-  elements.minutes.textContent = pad(minutes);
-  elements.seconds.textContent = pad(seconds);
+  daysEl.textContent = pad(Math.floor(totalSeconds / 86400), 3);
+  hoursEl.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+  minutesEl.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+  secondsEl.textContent = pad(totalSeconds % 60);
 }
 
-/* TOMBOL LAYAR PENUH */
-async function toggleFullscreen() {
+// Jalankan saat halaman dibuka dan perbarui setiap detik.
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Tombol layar penuh.
+fullBtn.addEventListener("click", async () => {
   try {
     if (!document.fullscreenElement) {
       await document.documentElement.requestFullscreen();
@@ -415,5 +270,16 @@ async function toggleFullscreen() {
       await document.exitFullscreen();
     }
   } catch (error) {
-    alert(
-      "Browser tidak mengizinkan layar penuh otomatis
+    console.error("Gagal membuka layar penuh:", error);
+    alert("Layar penuh tidak didukung oleh browser ini.");
+  }
+});
+
+document.addEventListener("fullscreenchange", () => {
+  fullBtn.textContent = document.fullscreenElement
+    ? "✕ Keluar layar penuh"
+    : "⛶ Layar penuh";
+});
+</script>
+</body>
+</html>
